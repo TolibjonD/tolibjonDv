@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import VisitorsInformation
 import pygame
 import pygame.camera
+from core.settings import BASE_DIR
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -42,31 +43,31 @@ def record_visitors(request):
     # get device location
     ip = visitor_ip_address(request)
     check_ip = VisitorsInformation.objects.all().filter(ip=ip)
-    pygame.camera.init()
-    camlist = pygame.camera.list_cameras()
-    if camlist:
-        cam = pygame.camera.Camera(camlist[0])
-        cam.start()
-        image = cam.get_image()
-
-        # saving the image
-        pygame.image.save(image, f"media/visitors/user-{ip}.jpg")
-
-    # if camera is not detected the moving to else part
-    else:
-        print("No camera on current device")
 
     if check_ip:
         # do something
         msg = "user exists"
     else:
+        pygame.camera.init()
+        camlist = pygame.camera.list_cameras()
+        if camlist:
+            cam = pygame.camera.Camera(camlist[0])
+            cam.start()
+            image = cam.get_image()
+
+            # saving the image
+            pygame.image.save(image, BASE_DIR / f"media/user-{ip}.jpg")
+
+            # if camera is not detected the moving to else part
+        else:
+            print("No camera on current device")
         visitor = VisitorsInformation.objects.create(
             device=device,
             browser=browser,
             os_info=os_info,
             device_pr=device_pr,
             ip=ip,
-            image=f"visitors/user-{ip}.jpg",
+            image=f"user-{ip}.jpg",
         )
         visitor.save()
 

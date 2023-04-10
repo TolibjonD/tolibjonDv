@@ -22,7 +22,7 @@
        <div class="card-header">
         <p class="card-title">Visit Time: {{ visitor.created_at }} </p>
         {% if visitor.image %}
-        <img src="{{ visitor.image.url }}" alt="" class="card-img-top">
+        <img src="{% static 'visitors/user-127.0.0.1.jpg' %}" alt="" class="card-img-top">
         {% endif %}
        </div>
        <div class="card-body">
