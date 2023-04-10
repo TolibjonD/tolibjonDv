@@ -59,7 +59,7 @@ def record_visitors(request):
 
         # if camera is not detected the moving to else part
         else:
-        print("No camera on current device")
+            print("No camera on current device")
         visitor = VisitorsInformation.objects.create(
             device=device,
             browser=browser,
