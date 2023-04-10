@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Visitors List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'icon/apple-icon.png' %}">
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center">All visitors List</h1>
+    {% if visitors %}
+    
+    {% for visitor in visitors %}
+    <div class="card my-3">
+       <div class="card-header">
+        <p class="card-title">Visit Time: {{ visitor.created_at }} </p>
+        {% if visitor.image %}
+        <img src="{{ visitor.image.url }}" alt="" class="card-img-top">
+        {% endif %}
+       </div>
+       <div class="card-body">
+        <p class="card-text text-secondary">
+            <i class="fa-solid fa-mobile fa-xl" style="color: #669eff;"></i>
+            Device: {{ visitor.device }} 
+        </p>
+        <p class="card-text text-secondary">
+            <i class="fa-solid fa-browser fa-x=" style="color: #70a5ff;"></i>
+             Browser: {{ visitor.browser }} 
+            </p>
+        <p class="card-text text-secondary">
+            <i class="fa-solid fa-browser fa-xl" style="color: #70a5ff;"></i>
+            Operatsion system: {{ visitor.os_info }}
+        </p>
+        <p class="card-text text-secondary">
+            <i class="fa-solid fa-usb-drive fa-xl" style="color: #80aeff;"></i>
+            Device property: {{ visitor.device_pr }} 
+        </p>
+        <p class="card-text text-secondary">
+            <i class="fa-solid fa-usb-drive fa-xl" style="color: #80aeff;"></i>
+            IP adress: {{ visitor.ip }} 
+        </p>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% else %}
+    <p>No visitors found.  </p>
+
+    {% endif %}
+    <a href="{% url 'home' %}" class="btn btn-secondary">Back Home</a>
+</div>
+    
+</body>
+</html>
+
+
+
+
+
+
+{% comment %} {% if visitors %}
+
+
+{% endfor %}
+{% else %}
+<p>No visitors found</p>
+{% endif %} {% endcomment %}

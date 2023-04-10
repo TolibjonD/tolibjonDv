@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% if messages %}
+                {% for message in messages %}
+                <div class="col">
+                 <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                     {{ message }}
+                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                   </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+<div class="col-12">
+    <h3 class="mb-3 text-dark text-center"> {{ post.title }} </h3>
+    <div class="col">
+      <p class=" text-secondary d-inline border bg-light px-2"><i class="fa-solid fa-clock" style="color: #70a5ff;"></i>  {{ post.created_at }} </p>
+    </div>
+    <img src="{{ post.image.url }}" alt="" class="img-fluid mb-3">
+    <p class="lead text-secondary"> {{ post.body|safe }} </p>
+    
+    <div class="row">
+      {% if request.user.is_superuser %}
+        <div class="col bg-light my-2 p-1 d-flex justify-content-center gap-2 border">
+
+            
+            <a href="?remove={{ post.slug }}" onclick="return confirm('Rostdan ham postni o`chirishni istayszmi ?')" class="text-white btn btn-secondary"><i class="fa-solid fa-trash" style="color: #70a5ff;"></i> O'chirish </a>
+                <!-- Button trigger modal -->
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-marker" style="color: #70a5ff;"></i> Tahrirlash </button>
+
+
+             <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="{% url 'detail' post.slug %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"> {{ post.title|truncatewords:3 }} </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            {{ form|crispy }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+          <button type="submit" class="btn btn-primary">Saqlash</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>    
+        </div>
+
+        
+        {% endif %}
+        <button class="btn border btn-light my-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+          <i class="fa-solid fa-comment" style="color: #75a8ff;"></i>  Izoh qoldirish
+        </button>
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body card-dark bg-light">
+          <form action="" method="post">
+            {% csrf_token %}
+            {{ comment_form|crispy }}
+              <input type="submit" class="btn btn-light border w-25 mx-auto" value="Yuborish">
+          </form>
+        </div>
+      </div>
+        {% if reviews.all %}
+        <h3><i class="fa-solid fa-star" style="color: #6ba1ff;"></i> Izohlar</h3>
+        <hr>
+        {% for review in reviews.all %}
+        <div class="card my-2">
+          <div class="card-header">
+            <p class="card-title"> {{ review.ismingiz }} </p>
+          </div>
+          <div class="card-body">
+            <p class="card-text text-secondary"> {{ review.fikringiz|safe }} </p>
+            {% if request.user.is_superuser %}
+            <a href="?review_id={{ review.id }}" onclick="return confirm('Rostdan ham postni o`chirishni istayszmi ?')" class="text-white btn btn-secondary"><i class="fa-solid fa-trash" style="color: #70a5ff;"></i> O'chirish </a>
+            {% endif %}
+          </div>
+          <div class="card-footer">
+            <span class="text-muted"><i class="fa-solid fa-clock" style="color: #70a5ff;"></i> {{ review.created_at }} </span>
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No comments found</p>
+        {% endif %}
+    </div>
+  
+ 
+    <a href="{% url 'home' %}" class="btn border text-secondary my-2"><i class="fa-solid fa-house" style="color: #5c98ff;"></i> Bosh sahifa</a>
+</div>
+
+
+{% endblock content %}
+

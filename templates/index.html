@@ -1,0 +1,207 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saidqodirov</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'icon/apple-icon.png' %}">
+</head>
+<body>
+   <!-- header section -->
+   <header id="header">
+    <div class="fixed">
+        <h2 class="text-white fw-bolder my-3">Saidqodirov Tolibjon</h2>
+        <p class="text-white my-4"><i class="fa-solid fa-code fa-bounce fa-xl" style="color: #ff208f;"></i> Full-Stack Developer</p>
+        <p class="text-white"><i class="fa-regular fa-envelope fa-bounce fa-xl" style="color: #f726ab;"></i>  tolibjondev@mail.ru</p>
+        {% if request.user.is_authenticated %}
+       {% if request.user.is_superuser %}
+      
+      
+       <div class="magic__btn">
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-bars fa-xl" style="color: #70a5ff;"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="{% url 'create' %}">
+                <i class="fa-solid fa-marker fa-sm" style="color: #f726ab;"></i>
+                    Post Yaratish
+              </a></li>
+              <li><a class="dropdown-item bg-primary text-white" href="{% url 'messages' %}">Xabarlar  <span class="badge text-bg-secondary"> {{ count }} </span></a></li>
+              <li><a class="dropdown-item" href="{% url 'visitors' %}">Guests</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'logout' %}" class="dropdown-item">Logout</a></li>
+            </ul>
+          </div>
+        
+       </div>
+       {% endif %}
+        {% endif %}
+    </div>
+   </header>
+   <!-- header section end -->
+   <!-- main section -->
+
+   <main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="offset-md-4 col g-5">
+              <div class="row">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="col">
+                 <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                     {{ message }}
+                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                   </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+                <div class="col-12">
+                    <h3 class="mb-5 text-dark text-center">Simple & Creative Portfolio Website Design</h3>
+                    <p class="lead text-secondary">This is my personal page. Here I share useful information and life-interesting posts from my experience. I think having a page like this is useful for every young programmer. You can get down to the end of the page and give me feedback.</p>
+                    <a href="{% static 'documents/basic_resume.pdf' %}" download class="btn border text-secondary">Download CV</a>
+                </div>
+              </div>
+              <div class="row reveal">
+                <div class="col-12 mt-5">
+                    <h4>Recent Posts</h4>
+                    {% if posts %}
+                    <div class="row mt-3">
+                    {% for post in posts %}
+                    
+                        <div class="col-md-6 text_box">
+                            <a href="{% url 'detail' post.slug %}">
+                                <div class="box">
+                                    <img src="{{ post.image.url }}" class="img-fluid" alt="POST-{{ post.id }}">
+                                    <div class="img_layer ">
+                                        <a href="{% url 'detail' post.slug %}">Batafsil</a>
+                                    </div>
+                                </div>
+                            </a>
+                            <h5 class="py-2 text-dark"> {{ post.title }} </h5>
+                            <p class="text-secondary"> {{ post.body|safe|truncatewords:15 }} </p>
+                        </div>
+                   
+                    {% endfor %}
+                </div>
+                   {% else %}
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <img src="https://images.unsplash.com/photo-1496065187959-7f07b8353c55?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="img-fluid" alt="">
+                            <h5 class="py-2 text-dark">Lorem ipsum dolor sit.</h5>
+                            <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut id recusandae illo debitis quis? Iusto doloremque in ipsum minima mollitia.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="img-fluid" alt="">
+                            <h5 class="py-2 text-dark">Lorem ipsum dolor sit.</h5>
+                            <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut id recusandae illo debitis quis? Iusto doloremque in ipsum minima mollitia.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="img-fluid" alt="">
+                            <h5 class="py-2 text-dark">Lorem ipsum dolor sit.</h5>
+                            <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut id recusandae illo debitis quis? Iusto doloremque in ipsum minima mollitia.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="img-fluid" alt="">
+                            <h5 class="py-2 text-dark">Lorem ipsum dolor sit.</h5>
+                            <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut id recusandae illo debitis quis? Iusto doloremque in ipsum minima mollitia.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="img-fluid" alt="">
+                            <h5 class="py-2 text-dark">Lorem ipsum dolor sit.</h5>
+                            <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut id recusandae illo debitis quis? Iusto doloremque in ipsum minima mollitia.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="img-fluid" alt="">
+                            <h5 class="py-2 text-dark">Lorem ipsum dolor sit.</h5>
+                            <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut id recusandae illo debitis quis? Iusto doloremque in ipsum minima mollitia.</p>
+                        </div>
+                        
+                    </div>
+                    {% endif %}
+                    <a href="https://tolibjonme.pythonanywhere.com/" class="btn border text-secondary mb-3"><i class="fa-solid fa-file-arrow-down fa-beat" style="color: #57beff;"></i> Full Portfolio</a>
+                </div>
+              </div>
+              <!-- end second part -->
+              <div class="row mt-5 pb-3 reveal">
+                <div class="col">
+                    <h1 class="text-dark text-center">Get In Touch</h1>
+                    <p class="text-secondary py-4"> 
+                        Dear guest of our page, you can give me feedback from here or write in praise of me. If you want to send me your address and other information, you can go to the message field and write: 1.Adress: Namangan, 2.Phone: +4 217 451 65 3. Please contact: I want to give you feedback. So you may come from your own scripture and leave a message . Tolibjon with pleasure 😉.    
+                    </p>
+                   {% if messages %}
+                   {% for message in messages %}
+                   <div class="col">
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                       
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                   </div>
+                   {% endfor %}
+                   {% endif %}
+                    <div class="row">
+                        <div class="col-md-8">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-file-signature" style="color: #669eff;"></i></span>
+                                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Name" name="name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-envelope" style="color: #619bff;"></i></span>
+                                            <input type="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Email" name="email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px" name="message"></textarea>
+                                            <label for="floatingTextarea2"><i class="fa-solid fa-message fa-shake" style="color: #6ba1ff;"></i> Message</label>
+                                          </div>
+                                    </div>
+                                </div>
+                                <button class="btn border text-secondary my-3" type="submit"><i class="fa-solid fa-paper-plane" style="color: #70a5ff;"></i> Send Message</button>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex flex-row mb-2 pb-md-4">
+                                <div class="d-flex justify-content-center align-items-center"><i class="fa-solid fa-house fa-xl" style="color: #5c98ff;"></i></div>
+                                <span class="px-md-2 w-75 ms-2"> Namangan reigon, Pop district</span>
+                            </div>
+                            <div class="d-flex flex-row py-2 py-md-4">
+                                <div class="d-flex justify-content-center align-items-center"><i class="fa-solid fa-phone fa-xl" style="color: #5c98ff;"></i></div>
+                                <span class="px-md-2 w-75 ms-2"> +998 94 274 2007</span>
+                            </div>
+                            <div class="d-flex flex-row py-2 py-md-4">
+                                <div class="d-flex justify-content-center align-items-center"><i class="fa-solid fa-envelope fa-xl" style="color: #5c98ff;"></i></div>
+                                <span class="px-md-2 w-75 ms-2"> tolibjondev@mail.ru</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <footer class="text-center bg-light p-3">
+                <span>&copy; Designed by TolibjonDev - 2023 &TRADE;</span>
+              </footer>
+            </div>
+        </div>
+    </div>
+   </main>
+   <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'icon/apple-icon.png' %}">
+
+</head>
+<body>
+    
+<div class="container">
+    {% if messages %}
+
+
+    <h4 class="mt-4"><a href="{% url 'home' %}" style="text-decoration: none;" class="btn btn-secondary fs-6"><i class="fa-solid fa-house" style="color: #5c98ff;"></i> Bosh sahifa</a> -Barcha Xabarlar </h4>
+    <button type="button" class="btn btn-primary">
+        Barchasi <span class="badge text-bg-secondary">{{ count }}</span>
+      </button>
+    <div class="row mt-3">
+    {% for message in messages %}
+    <div class="col-md-6 mt-2">
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" class="card-img-top" alt="">
+   <div class="card-body">
+    <h5 class="card-title text-dark"><strong>Ismi: </strong> {{ message.name }} </h5>
+    <p class="card-text text-secondary"><strong>Xabar Matni: </strong> {{ message.message }} </p>
+    <p class="text-secondary"><strong>E-mail: </strong> {{ message.email }} </p>
+    <a href="?delete={{ message.id }}" onclick="return confirm('Rostdan ham xabarni olish tashlaysami ?')" class="btn btn-light border">O'chirish</a>
+   </div>
+   <div class="card-footer">
+    <span class="text-muted"><i class="fa-solid fa-clock" style="color: #70a5ff;"></i>  {{ message.date_send }} </span>
+   </div>
+    </div>
+    
+    </div>
+    {% endfor %}
+    </div>
+    
+    {% else %}
+    <p>No messages found</p>
+    {% endif %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+</body>
+</html>
