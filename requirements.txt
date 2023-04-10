@@ -4,3 +4,4 @@ django_user_agents
 pyyaml ua-parser user-agents
 Pillow
 requests
+pygame
