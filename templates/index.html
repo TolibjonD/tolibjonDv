@@ -6,18 +6,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saidqodirov</title>
+    <title>Bosh sahifa</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'style.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'icon/apple-icon.png' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
 </head>
 <body>
    <!-- header section -->
    <header id="header">
     <div class="fixed">
-        <h2 class="text-white fw-bolder my-3">Saidqodirov Tolibjon</h2>
-        <p class="text-white my-4"><i class="fa-solid fa-code fa-bounce fa-xl" style="color: #ff208f;"></i> Full-Stack Developer</p>
+        <h2 class="text-white fw-bolder my-3">Saidkodirov Tolibjon</h2>
+        <p class="text-white my-4"><i class="fa-solid fa-code fa-bounce fa-xl" style="color: #ff208f;"></i> Backend Developer</p>
         <p class="text-white"><i class="fa-regular fa-envelope fa-bounce fa-xl" style="color: #f726ab;"></i>  tolibjondev@mail.ru</p>
         {% if request.user.is_authenticated %}
        {% if request.user.is_superuser %}
@@ -65,14 +64,14 @@
                 {% endfor %}
                 {% endif %}
                 <div class="col-12">
-                    <h3 class="mb-5 text-dark text-center">Simple & Creative Portfolio Website Design</h3>
-                    <p class="lead text-secondary">This is my personal page. Here I share useful information and life-interesting posts from my experience. I think having a page like this is useful for every young programmer. You can get down to the end of the page and give me feedback.</p>
-                    <a href="{% static 'documents/basic_resume.pdf' %}" download class="btn border text-secondary">Download CV</a>
+                    <h3 class="mb-5 text-dark text-center"><span class="text-info">Simple</span> & Creative <span class="text-info">Portfolio</span> Website Design</h3>
+                    <p class="lead text-secondary">Bu mening shaxsiy blog sahifam. Bu yerda men kunlik  yangiliklar va blog postlar ulashib boraman. Agar sizda qandaydir taklif va e'tirozlar bo'lsa sahifa pastida izoh qoldirishingiz mumkin va men sizning xabaringizni mamnuniyat bilan o'qib chiqaman. Shuningdek joylagan blog postlarimga kirib ularga izoh qoldirish imkoniyati ham mavjud. Sahifaga tashrifingizdan hursandman. </p>
+                    <a href="https://t.me/Saidkodirov" class="btn border text-secondary"><i class="fab fa-telegram" style="color: #57beff;"></i> Chat on Telegram</a>
                 </div>
               </div>
               <div class="row reveal">
                 <div class="col-12 mt-5">
-                    <h4>Recent Posts</h4>
+                    <h4>So'nggi postlar</h4>
                     {% if posts %}
                     <div class="row mt-3">
                     {% for post in posts %}
@@ -127,7 +126,7 @@
                         
                     </div>
                     {% endif %}
-                    <a href="https://tolibjonme.pythonanywhere.com/" class="btn border text-secondary mb-3"><i class="fa-solid fa-file-arrow-down fa-beat" style="color: #57beff;"></i> Full Portfolio</a>
+                    <a href="https://www.instagram.com/__jamshidbek1" class="btn border text-secondary mb-3"><i class="fab fa-instagram" style="color: #57beff;"></i> Instagram manzil</a>
                 </div>
               </div>
               <!-- end second part -->
@@ -135,7 +134,7 @@
                 <div class="col">
                     <h1 class="text-dark text-center">Get In Touch</h1>
                     <p class="text-secondary py-4"> 
-                        Dear guest of our page, you can give me feedback from here or write in praise of me. If you want to send me your address and other information, you can go to the message field and write: 1.Adress: Namangan, 2.Phone: +4 217 451 65 3. Please contact: I want to give you feedback. So you may come from your own scripture and leave a message . Tolibjon with pleasure 😉.    
+                        Menga su yerdan o'z taklif va tanbehlaringizni yuborishingiz mumkin. Men albatta ularni o'qib chiqaman va bu men uchun foydali bo'ladi. Mamnuniyat bilan yosh dasturchi <span class="text-info fs-4">Jamshidbek</span> 😉.    
                     </p>
                    {% if messages %}
                    {% for message in messages %}
@@ -156,7 +155,7 @@
                                     <div class="col-md-6">
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-file-signature" style="color: #669eff;"></i></span>
-                                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Name" name="name">
+                                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ismingiz" name="name">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -170,17 +169,17 @@
                                     <div class="col">
                                         <div class="form-floating">
                                             <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px" name="message"></textarea>
-                                            <label for="floatingTextarea2"><i class="fa-solid fa-message fa-shake" style="color: #6ba1ff;"></i> Message</label>
+                                            <label for="floatingTextarea2"><i class="fa-solid fa-message fa-shake" style="color: #6ba1ff;"></i> Xabar</label>
                                           </div>
                                     </div>
                                 </div>
-                                <button class="btn border text-secondary my-3" type="submit"><i class="fa-solid fa-paper-plane" style="color: #70a5ff;"></i> Send Message</button>
+                                <button class="btn border text-secondary my-3" type="submit"><i class="fa-solid fa-paper-plane" style="color: #70a5ff;"></i> Xabarni yuborish</button>
                             </form>
                         </div>
                         <div class="col-md-4">
                             <div class="d-flex flex-row mb-2 pb-md-4">
                                 <div class="d-flex justify-content-center align-items-center"><i class="fa-solid fa-house fa-xl" style="color: #5c98ff;"></i></div>
-                                <span class="px-md-2 w-75 ms-2"> Namangan reigon, Pop district</span>
+                                <span class="px-md-2 w-75 ms-2"> Namangan , Pop</span>
                             </div>
                             <div class="d-flex flex-row py-2 py-md-4">
                                 <div class="d-flex justify-content-center align-items-center"><i class="fa-solid fa-phone fa-xl" style="color: #5c98ff;"></i></div>
@@ -195,7 +194,7 @@
                 </div>
               </div>
               <footer class="text-center bg-light p-3">
-                <span>&copy; Designed by TolibjonDev - 2023 &TRADE;</span>
+                <span>&copy; Designed by Saidkodirov - 2023 &TRADE;</span>
               </footer>
             </div>
         </div>

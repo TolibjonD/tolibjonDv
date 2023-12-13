@@ -8,7 +8,6 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from .forms import PostForm, PostCommentsForm
 from django.conf import settings
-from visitors.views import record_visitors
 
 # Create your views here.
 
@@ -17,7 +16,6 @@ class HomePageView(View):
     def get(self, request):
         posts = Posts.objects.all().order_by("-created_at")[:10]
         count = Comments.objects.all().count()
-        record_visitors(request)
         return render(request, "index.html", {"posts": posts, "count": count})
 
     def post(self, request):
