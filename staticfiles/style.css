@@ -1,22 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400&display=swap');
 
-*{
+* {
     font-family: 'Nunito', sans-serif;
     text-decoration: none;
 }
 
-.magic__btn{
+.magic__btn {
     position: fixed;
     right: 10px;
     z-index: 99999999;
     top: 20px;
 }
 
-.box{
+.box {
     position: relative;
 }
 
-.box .img_layer{
+.box .img_layer {
     position: absolute;
     top: 1.3px;
     left: 1.3px;
@@ -24,15 +24,17 @@
     padding: 0px 2.5px;
     transition: .3s;
 }
-.box:hover .img_layer{
+
+.box:hover .img_layer {
     background-color: rgb(255, 22, 135);
 }
-.box .img_layer a{
+
+.box .img_layer a {
     text-decoration: none;
     color: #fff;
 }
 
-#header .fixed{
+#header .fixed {
     width: 33%;
     display: flex;
     justify-content: center;
@@ -40,46 +42,47 @@
     height: 100%;
     position: fixed;
     left: 0;
-    background: url("images/bg.jpg");
+    background: #555 url("images/bg4.jpeg");
+    background-blend-mode: multiply;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     flex-direction: column;
 }
 
-.text_box:nth-child(odd){
+.text_box:nth-child(odd) {
     transform: scale(.6) translateX(-350px) translateY(200px);
     transition: .2s all ease;
     opacity: 0;
 }
 
-.text_box:nth-child(even){
+.text_box:nth-child(even) {
     transform: scale(.2) translateX(350px) translateY(200px);
     transition: .3s all ease;
     opacity: 0;
 }
 
-.text_box.active{
+.text_box.active {
     transform: scale(1) translateX(0);
     opacity: 1;
 }
 
 
-.reveal{
+.reveal {
     position: relative;
     transform: translateY(150px);
     opacity: 0;
     transition: .4s all ease;
-  }
-  
-  .reveal.active{
+}
+
+.reveal.active {
     transform: translateY(0);
     opacity: 1;
-  }
+}
 
 
-@media (max-width: 768px){
-    #header .fixed{
+@media (max-width: 768px) {
+    #header .fixed {
         position: relative;
         width: 100%;
         height: 50%;

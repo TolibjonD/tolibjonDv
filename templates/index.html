@@ -41,6 +41,8 @@
         
        </div>
        {% endif %}
+        {% else %}
+        <div class="login"><a href="{% url "login" %}"><i class="fa-solid fa-user" style="color: #6ccaf9;"></i></a></div>
         {% endif %}
     </div>
    </header>
