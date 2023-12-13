@@ -57,7 +57,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # other middlewares...
-    "django_user_agents.middleware.UserAgentMiddleware",
 ]
 
 
